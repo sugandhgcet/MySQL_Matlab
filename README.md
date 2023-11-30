@@ -166,7 +166,8 @@ disp(conn);
 
 % Write data to the database
 tablename = 'My_Database_Table'; % If the table does not exist, it will be created
-Data = table(datetime('2023-11-13 09:53:51', 'Format', 'yyyy-MM-dd HH:mm:ss'), [1.6999e9; 1.6999e9; 1.6999e9], [0.767; 0.775; 0.783], 'VariableNames', {'PMU_time', 'Var1', 'Var2'});
+Data = table(datetime('2023-11-13 09:53:51', 'Format', 'yyyy-MM-dd HH:mm:ss'),
+[1.6999e9; 1.6999e9; 1.6999e9], [0.767; 0.775; 0.783], 'VariableNames', {'PMU_time', 'Var1', 'Var2'});
 sqlwrite(conn, tablename, Data);
 
 % Close the database connection
