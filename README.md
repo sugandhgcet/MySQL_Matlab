@@ -93,17 +93,17 @@ conn=
 tablename=My_Database_Table (If table name is not present it will create the table with this name)
 sqlwrite(conn,tablename,Data) ( Where Data is the table you wan t to write to database)
 * Below is the Data
-data =
-```matlab
-  3×3 table
+		data =
+		
+		  3×3 table
+		
+		         PMU_time             Var1       Var2 
+		    ___________________    __________    _____
+		
+		    2023-11-13 09:53:51    1.6999e+09    0.767
+		    2023-11-13 09:53:51    1.6999e+09    0.775
+		    2023-11-13 09:53:51    1.6999e+09    0.783
 
-         PMU_time             Var1       Var2 
-    ___________________    __________    _____
-
-    2023-11-13 09:53:51    1.6999e+09    0.767
-    2023-11-13 09:53:51    1.6999e+09    0.775
-    2023-11-13 09:53:51    1.6999e+09    0.783
-```matlab
 
 # MySQL_Matlab
 
