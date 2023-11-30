@@ -1,5 +1,12 @@
 # MySQL_Matlab
-How to configure MySQL in Matlab for timetable storing From MATLAB. 
+> How to Store Table from Matlab to Database.
+
+> How to Configure MySQL for Matlab Integration.
+
+> How to Configure Database Explorer in Matlab for MySQL Database.
+
+> How to Configure ODBC Driver for MYSQL Database integration in matlab.
+
 # MySQL Workbench
 Download and install MySQL Server from below link
 
