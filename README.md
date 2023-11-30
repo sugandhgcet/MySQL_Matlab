@@ -103,3 +103,71 @@ data =
     2023-11-13 09:53:51    1.6999e+09    0.767
     2023-11-13 09:53:51    1.6999e+09    0.775
     2023-11-13 09:53:51    1.6999e+09    0.783
+
+
+# MySQL_Matlab
+
+This repository provides instructions and code for configuring MySQL in MATLAB to store timetables. Follow the steps below to set up MySQL in MATLAB, including installing MySQL Server, MySQL Workbench, ODBC Driver, and configuring MATLAB for database connection.
+
+## MySQL Server Installation
+
+1. Download and install MySQL Server from [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/).
+2. During installation, run MySQL Configurator to configure MySQL Server.
+3. If the port 3308 is already in use, stop the MySQL80 server from Windows services.
+4. Set a password of your choice during installation.
+5. Complete the MySQL Server installation.
+
+## MySQL Workbench Installation
+
+1. Download MySQL Workbench from [https://dev.mysql.com/downloads/workbench/](https://dev.mysql.com/downloads/workbench/).
+2. Install the latest version of MySQL Workbench.
+3. Run MySQL Workbench and click on the Home icon at the top.
+4. Open MySQL Connections and set up a new connection.
+5. Connection details:
+   - Connection Name: Choose a name (e.g., matpdcdb).
+   - Connection Method: Standard(TCP/IP)
+   - Hostname: 127.0.0.1
+   - Port: 3306
+   - User: root
+6. Test the connection by providing the password.
+7. Once successful, click OK to set up the connection.
+8. Create a new schema (database) in the Navigator panel.
+9. Close MySQL Workbench.
+
+## ODBC Driver Installation
+
+1. Download the ODBC driver from [https://downloads.mysql.com/archives/c-odbc/](https://downloads.mysql.com/archives/c-odbc/).
+2. Download and install the 64-bit drivers.
+
+## MATLAB Configuration
+
+1. Open MATLAB and go to the APP tab, then open the Database Explorer.
+2. Click on "Configure Database Source" and then "Configure ODBC Data Source."
+3. In the System DNS tab, click Add.
+4. Choose MySQL ODBC ANSI Driver and click OK.
+5. Provide the following information:
+   - Datasource Name: matpdcdb (Your database name)
+   - TCP/IP Server: localhost
+   - Username: root
+   - Password: Your database password (e.g., root)
+   - Database: matpdc (selected schema from MySQL Workbench)
+6. Click OK and close the Database Explorer window.
+
+## MATLAB Code
+
+Use the following MATLAB code to test the connection and write to the database:
+
+```matlab
+% Establish a connection to the database
+conn = database('matpdcdb', 'root', 'root');
+
+% Display the connection properties
+disp(conn);
+
+% Write data to the database
+tablename = 'My_Database_Table'; % If the table does not exist, it will be created
+Data = table(datetime('2023-11-13 09:53:51', 'Format', 'yyyy-MM-dd HH:mm:ss'), [1.6999e9; 1.6999e9; 1.6999e9], [0.767; 0.775; 0.783], 'VariableNames', {'PMU_time', 'Var1', 'Var2'});
+sqlwrite(conn, tablename, Data);
+
+% Close the database connection
+close(conn);
