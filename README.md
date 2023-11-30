@@ -37,7 +37,69 @@ user:root
 * Now close it
   # ODBC Driver
   > Download the ODBC driver from the below link
-  >  
-* 
+* https://downloads.mysql.com/archives/c-odbc/
+* Download the 64 bit drivers and install them
+  # Matlab Configuration
+* Open the matlab and open database explorer from APP tab.
+* Click on Configure Database Source
+* click on Configure ODBC data Source
+* Click on System DNS tab
+* Click on Add
+* Click on MySQL ODBC ANSI Driver
+* Click ok
+* new window will open
+* Give the Datasourse name- matpdcdb (Your database name)
+* TCP/IP Server: localhost
+* Give the username: root
+* password- previous database password (root in my case)
+* Click on Database from dropdown arrow: matpdc (in my case, I made this in  MySQL Workbench as schema)
+* click ok
+* and again ok
+* close the data exlorer window.
+* Write below code in Matlab and run it
 
+  conn==database('matpdcdb', 'root','root')
 
+> This will show following output
+conn= 
+
+  connection with properties:
+
+                  DataSource: 'matpdcdb'
+                    UserName: 'root'
+                     Message: ''
+                        Type: 'ODBC Connection Object'
+  Database Properties:
+
+                  AutoCommit: 'on'
+                    ReadOnly: 'off'
+                LoginTimeout: 0
+      MaxDatabaseConnections: 0
+
+  Catalog and Schema Information:
+
+              DefaultCatalog: 'matpdcdb'
+                    Catalogs: {'information_schema', 'matpdc', 'matpdc_db' ... and 6 more}
+                     Schemas: {}
+
+  Database and Driver Information:
+
+         DatabaseProductName: 'MySQL'
+      DatabaseProductVersion: '8.0.34'
+                  DriverName: 'myodbc8a.dll'
+               DriverVersion: '08.00.0033'
+
+> Now write beow command to write to database
+tablename=My_Database_Table (If table name is not present it will create the table with this name)
+sqlwrite(conn,tablename,Data) ( Where Data is the table you wan t to write to database)
+* Below is the Data
+data =
+
+  3×3 table
+
+         PMU_time             Var1       Var2 
+    ___________________    __________    _____
+
+    2023-11-13 09:53:51    1.6999e+09    0.767
+    2023-11-13 09:53:51    1.6999e+09    0.775
+    2023-11-13 09:53:51    1.6999e+09    0.783
