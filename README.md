@@ -94,7 +94,7 @@ tablename=My_Database_Table (If table name is not present it will create the tab
 sqlwrite(conn,tablename,Data) ( Where Data is the table you wan t to write to database)
 * Below is the Data
 data =
-
+```matlab
   3×3 table
 
          PMU_time             Var1       Var2 
@@ -103,7 +103,7 @@ data =
     2023-11-13 09:53:51    1.6999e+09    0.767
     2023-11-13 09:53:51    1.6999e+09    0.775
     2023-11-13 09:53:51    1.6999e+09    0.783
-
+```matlab
 
 # MySQL_Matlab
 
@@ -164,10 +164,13 @@ conn = database('matpdcdb', 'root', 'root');
 % Display the connection properties
 disp(conn);
 
-% Write data to the database
-tablename = 'My_Database_Table'; % If the table does not exist, it will be created
-Data = table(datetime('2023-11-13 09:53:51', 'Format', 'yyyy-MM-dd HH:mm:ss'),
-[1.6999e9; 1.6999e9; 1.6999e9], [0.767; 0.775; 0.783], 'VariableNames', {'PMU_time', 'Var1', 'Var2'});
+timeVector = repmat(datetime('2023-11-13 09:53:51', 'Format', 'yyyy-MM-dd HH:mm:ss'), 3, 1);
+var1Vector = repmat([1.6999e9], 3, 1);
+var2Vector = repmat([0.767; 0.775; 0.783], 1, 1);
+
+% Create the table
+Data = table(timeVector, var1Vector, var2Vector, 'VariableNames', {'PMU_time', 'Var1', 'Var2'});
+
 sqlwrite(conn, tablename, Data);
 
 % Close the database connection
